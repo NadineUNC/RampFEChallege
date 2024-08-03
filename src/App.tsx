@@ -79,7 +79,7 @@ export function App() {
         <div className="RampGrid">
           <Transactions transactions={transactions} />
 
-          {paginatedTransactions !== null && transactions !== null && (
+          {paginatedTransactions?.nextPage !== null && paginatedTransactions !== null && transactions !== null && (
             <button
               className="RampButton"
               disabled={paginatedTransactionsUtils.loading}

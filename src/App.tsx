@@ -39,7 +39,7 @@ export function App() {
         await loadAllTransactions()
       }
     },
-    [paginatedTransactionsUtils, transactionsByEmployeeUtils]
+    [paginatedTransactionsUtils, transactionsByEmployeeUtils, loadAllTransactions]
   )
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export function App() {
         <div className="RampGrid">
           <Transactions transactions={transactions} />
 
-          {transactions !== null && (
+          {paginatedTransactions !== null && transactions !== null && (
             <button
               className="RampButton"
               disabled={paginatedTransactionsUtils.loading}

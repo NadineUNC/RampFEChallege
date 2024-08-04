@@ -24,20 +24,14 @@ export function App() {
     transactionsByEmployeeUtils.invalidateData()
 
     await employeeUtils.fetchAll()
-    await paginatedTransactionsUtils.fetchAll()
-
     setIsLoading(false)
+    await paginatedTransactionsUtils.fetchAll()
   }, [employeeUtils, paginatedTransactionsUtils, transactionsByEmployeeUtils])
 
   const loadTransactionsByEmployee = useCallback(
     async (employeeId: string) => {
-      if (employeeId !== ""){
         paginatedTransactionsUtils.invalidateData()
         await transactionsByEmployeeUtils.fetchById(employeeId)
-      }
-      else{
-        await loadAllTransactions()
-      }
     },
     [paginatedTransactionsUtils, transactionsByEmployeeUtils, loadAllTransactions]
   )
@@ -67,6 +61,10 @@ export function App() {
           })}
           onChange={async (newValue) => {
             if (newValue === null) {
+              return
+            }
+            if ( newValue.id === "") {
+              await loadAllTransactions()
               return
             }
 
